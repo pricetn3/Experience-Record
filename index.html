@@ -119,12 +119,15 @@
                       <div class="acc-panel" id="{{ item.panelId }}" role="region" aria-labelledby="{{ item.btnId }}" style="{{ item.panelStyle }}">
                         <div style="min-height: 0; overflow: hidden;">
                         <div style="{{ itemBodyStyle }}">
-                          <p style="margin: 0 0 10px; font-size: 14px; color: #52525b; line-height: 1.55;">{{ item.description }}</p>
-                          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                            <sc-for list="{{ item.tags }}" as="tag" hint-placeholder-count="3">
-                              <span style="border: 1px solid rgb(233,234,235); background: rgb(250,250,250); border-radius: 16px; padding: 2px 10px; font-size: 12px; line-height: 18px; font-weight: 500; color: #3f3f46;">{{ tag }}</span>
+                          <p style="{{ descStyle }}">{{ item.description }}</p>
+                          <dl style="{{ factsStyle }}">
+                            <sc-for list="{{ item.facts }}" as="fact" hint-placeholder-count="4">
+                              <div style="display: flex; flex-direction: column; gap: 2px; min-width: 0;">
+                                <dt style="margin: 0; font-size: 14px; line-height: 20px; font-weight: 500; color: rgb(83,88,98);">{{ fact.label }}</dt>
+                                <dd style="margin: 0; font-size: 16px; line-height: 24px; font-weight: 500; color: #18181b;">{{ fact.value }}</dd>
+                              </div>
                             </sc-for>
-                          </div>
+                          </dl>
                         </div>
                         </div>
                       </div>
@@ -140,13 +143,13 @@
 
       <div style="{{ publisherStyle }}">
         <div style="{{ publisherHeadingStyle }}">Publisher</div>
-        <div style="font-size: 14px; color: #3f3f46; line-height: 20px;">
+        <div style="font-size: 16px; color: #3f3f46; line-height: 24px;">
           Office of the Registrar Indiana University Bloomington<br/>
           408 N. Union Street, Bloomington, IN 47405<br/>
           +18128556500<br/>
           <span style="display: block; margin-top: 4px;">To validate the authenticity of this credential, please visit the institution’s website and enter the CeDID.</span>
         </div>
-        <a class="cc-btn-secondary" href="https://cecredential.iu.edu/validation/index.html" target="_blank" rel="noopener noreferrer" style="margin-top: 16px; box-sizing: border-box; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 16px; background: #ffffff; border: none; border-radius: 8px; font-family: Inter, sans-serif; font-size: 14px; line-height: 20px; font-weight: 500; color: rgb(65,70,81); white-space: nowrap; cursor: pointer; box-shadow: 0 1px 2px 0 rgba(10,13,18,0.05), inset 0 -2px 0 0 rgba(10,13,18,0.05), inset 0 0 0 1px rgb(213,215,218); transition: background 150ms cubic-bezier(0.2,0.6,0.2,1), color 150ms cubic-bezier(0.2,0.6,0.2,1);" style-hover="background: rgb(250,250,250); color: rgb(39,43,53);">Visit website<span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;"> (opens in a new tab)</span></a>
+        <a class="cc-btn-secondary" href="https://cecredential.iu.edu/validation/index.html" target="_blank" rel="noopener noreferrer" style="margin-top: 16px; box-sizing: border-box; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 44px; padding: 0 20px; background: #ffffff; border: none; border-radius: 8px; font-family: Inter, sans-serif; font-size: 16px; line-height: 24px; font-weight: 500; color: rgb(65,70,81); white-space: nowrap; cursor: pointer; box-shadow: 0 1px 2px 0 rgba(10,13,18,0.05), inset 0 -2px 0 0 rgba(10,13,18,0.05), inset 0 0 0 1px rgb(213,215,218); transition: background 150ms cubic-bezier(0.2,0.6,0.2,1), color 150ms cubic-bezier(0.2,0.6,0.2,1);" style-hover="background: rgb(250,250,250); color: rgb(39,43,53);">Visit website<span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;"> (opens in a new tab)</span></a>
       </div>
 
     </div>
@@ -181,33 +184,40 @@ class Component extends DCLogic {
   data = [
     { id: 'fall2026', label: 'Fall 2026', items: [
       { id: 'col-x390', code: 'COL-X390', title: 'ASURE (Arts & Sciences Undergraduate Research Experience)',
-        description: "Formally documents a learner’s hands-on and unique experiences. It captures skills, competencies, and achievements to motivate and showcase continued learning.",
+        description: "Formally documents a learner’s hands-on and unique experiences. It captures skills, competencies, and achievements to motivate and showcase continued learning. Students work alongside an IU faculty mentor on an original research question, moving from a written proposal through data collection to a public presentation of their findings at the end of the term.",
+        category: 'Research, Creative & Project-based Activities',
         completed: '12/20/2026', tags: ['Undergraduate Research', 'Applied', 'Curricular'] },
       { id: 'col-cr1', code: 'COL-CR1', title: 'Liberal Arts and Life Design',
-        description: 'Explores career readiness through structured reflection and skill-building workshops tied to a liberal arts curriculum.',
+        description: 'Explores career readiness through structured reflection and skill-building workshops tied to a liberal arts curriculum. Students map their interests and strengths to possible career paths, practice telling the story of their education to employers, and leave with a plan for internships and next steps.',
+        category: 'Professional & Career Experiences',
         completed: '11/02/2026', tags: ['Career Exploration', 'Exploratory', 'Co-curricular'] }
     ]},
     { id: 'spring2026', label: 'Spring 2026', items: [
       { id: 'col-x398', code: 'COL-X398', title: 'Career Exploration Internship',
-        description: 'A supervised internship placement connecting classroom learning to a professional work environment.',
+        description: 'A supervised internship placement connecting classroom learning to a professional work environment. Students set learning goals with their site supervisor, check in regularly with an IU internship coordinator, and finish with a written reflection on the skills they built on the job.',
+        category: 'Professional & Career Experiences',
         completed: '05/10/2026', tags: ['Professional Experience', 'Applied', 'Curricular'] },
       { id: 'col-cr2', code: 'COL-CR2', title: 'Professional Development Seminar',
-        description: 'A co-curricular seminar series building workplace communication and leadership skills.',
+        description: 'A co-curricular seminar series building workplace communication and leadership skills. Sessions cover giving and receiving feedback, running effective meetings, and professional writing, with peer coaching between sessions to put each skill into practice.',
+        category: 'Community Engagement & Leadership',
         completed: '04/18/2026', tags: ['Leadership', 'Exploratory', 'Co-curricular'] }
     ]},
     { id: 'fall2025', label: 'Fall 2025', items: [
       { id: 'educ-y400', code: 'EDUC-Y400', title: 'Community Engagement Practicum',
-        description: 'A field-based practicum partnering students with local community organizations on service projects.',
+        description: 'A field-based practicum partnering students with local community organizations on service projects. Students spend the term on a need identified by their partner organization and reflect on how their coursework applies to the community they serve.',
+        category: 'Community Engagement & Leadership',
         completed: '12/15/2025', tags: ['Community Engagement', 'Applied', 'Curricular'] }
     ]},
     { id: 'spring2025', label: 'Spring 2025', items: [
       { id: 'hon-x301', code: 'HON-X301', title: 'Study Abroad: Global Leadership',
-        description: 'An immersive study away program focused on cross-cultural leadership and global perspectives.',
+        description: 'An immersive study away program focused on cross-cultural leadership and global perspectives. Students take courses with local faculty, complete a leadership project with an international partner organization, and reflect on how working across cultures shaped the way they lead.',
+        category: 'Study Abroad & Study Away',
         completed: '05/02/2025', tags: ['Study Abroad', 'Professional', 'Curricular'] }
     ]}
   ];
 
-  toggleTerm(id) { this.setState(s => ({ openTerm: s.openTerm === id ? null : id })); }
+  // Closing a term (or opening another) also closes every course inside it, so it reopens collapsed.
+  toggleTerm(id) { this.setState(s => ({ openTerm: s.openTerm === id ? null : id, openItems: {} })); }
   toggleItem(id) { this.setState(s => ({ openItems: { ...s.openItems, [id]: !s.openItems[id] } })); }
 
   renderVals() {
@@ -230,7 +240,7 @@ class Component extends DCLogic {
         toggle: () => this.toggleTerm(term.id),
         items: term.items.map(item => {
           const o = !!openItems[item.id];
-          return { ...item, isOpen: o, expanded: o ? 'true' : 'false', btnId: 'acc-btn-' + item.id, panelId: 'acc-panel-' + item.id, panelStyle: panel(o), chevStyle: chev(o), toggle: () => this.toggleItem(item.id) };
+          return { ...item, facts: [{ label: 'Category', value: item.category }, { label: 'Activity type', value: item.tags[0] }, { label: 'Intensity', value: item.tags[1] }, { label: 'Credit', value: item.tags[2] }], isOpen: o, expanded: o ? 'true' : 'false', btnId: 'acc-btn-' + item.id, panelId: 'acc-panel-' + item.id, panelStyle: panel(o), chevStyle: chev(o), toggle: () => this.toggleItem(item.id) };
         })
       };
     });
@@ -246,37 +256,39 @@ class Component extends DCLogic {
 
       frameStyle: v('', 'max-width: 390px; margin: 0 auto; border: 1px solid rgb(233,234,235); box-shadow: 0 0 24px rgba(10,13,18,0.15); overflow: hidden;'),
       headerBarStyle: `background: #990000; display: flex; align-items: center; height: ${v('72px', '52px')};`,
-      logoStyle: `height: 100%; width: auto; display: block; margin-left: ${v('28px', '14px')};`,
+      logoStyle: `height: 100%; width: auto; display: block; margin-left: 0;`,
       heroStyle: `position: relative; padding: ${v('40px 24px 60px', '16px 12px 32px')};`,
-      cardStyle: `position: relative; z-index: 2; max-width: ${v('1000px', '100%')}; margin: 0 auto; background: #ffffff; border-radius: 12px; box-shadow: 0 10px 40px rgba(10,13,18,0.25); overflow: hidden;`,
+      cardStyle: `position: relative; z-index: 2; max-width: ${v('1120px', '100%')}; margin: 0 auto; background: #ffffff; border-radius: 12px; box-shadow: 0 10px 40px rgba(10,13,18,0.25); overflow: hidden;`,
 
       ruleStyle: `position: absolute; left: ${v('54px', '12px')}; top: ${v('36px', '20px')}; bottom: 0; width: 3px; background: #0B6CB7; z-index: 1;`,
       introStyle: `background: rgb(233,234,236); padding: ${v('48px', '24px')} ${padX} ${v('48px', '28px')};`,
-      h1Style: `margin: 0 0 ${v('12px', '10px')}; font-size: ${v('30px', '22px')}; line-height: 1.25; letter-spacing: -0.02em; color: #18181b; font-weight: 600;`,
-      pStyle: `margin: 0; color: #52525b; font-size: ${v('16px', '14px')}; line-height: ${v('24px', '21px')}; text-wrap: pretty;`,
+      h1Style: `margin: 0 0 ${v('12px', '10px')}; font-size: ${v('36px', '26px')}; line-height: 1.25; letter-spacing: -0.02em; color: #18181b; font-weight: 600;`,
+      pStyle: `margin: 0; color: #52525b; font-size: ${v('17px', '16px')}; line-height: ${v('27px', '25px')}; text-wrap: pretty;`,
 
       rowStyle: `padding: ${v('48px', '24px')} ${padX} 0; display: flex; gap: ${v('48px', '20px')}; align-items: center; flex-direction: ${v('row', 'column-reverse')};`,
       studentBoxStyle: `flex: ${v('1 1 auto', '0 0 auto')}; width: ${v('auto', '100%')}; box-sizing: border-box; background: rgb(250,250,250); border: 1px solid rgb(233,234,235); border-radius: 8px; padding: ${v('16px 14px 14px', '14px 12px 12px')};`,
-      studentHeadingStyle: `font-weight: 600; font-size: ${v('20px', '17px')}; line-height: 28px; color: #18181b; margin-bottom: 14px;`,
-      tableGridStyle: `display: grid; grid-template-columns: ${v('140px 1fr', '1fr')}; font-size: 14px; line-height: 20px;`,
+      studentHeadingStyle: `font-weight: 600; font-size: ${v('22px', '19px')}; line-height: 30px; color: #18181b; margin-bottom: 14px;`,
+      tableGridStyle: `display: grid; grid-template-columns: ${v('160px 1fr', '1fr')}; font-size: ${v('16px', '15px')}; line-height: 24px;`,
       labelFirstStyle: `color: #3f3f46; white-space: nowrap; padding: ${v('10px 12px', '10px 12px 2px')};`,
       labelStyle: `color: #3f3f46; white-space: nowrap; border-top: 1px solid rgb(233,234,235); padding: ${v('10px 12px', '10px 12px 2px')};`,
       valueFirstStyle: `color: #18181b; font-weight: 600; overflow-wrap: anywhere; padding: ${v('10px 12px', '0 12px 10px')}; border-left: ${v('1px solid rgb(233,234,235)', 'none')};`,
       valueStyle: `color: #18181b; font-weight: 600; overflow-wrap: anywhere; padding: ${v('10px 12px', '0 12px 10px')}; border-left: ${v('1px solid rgb(233,234,235)', 'none')}; border-top: ${v('1px solid rgb(233,234,235)', 'none')};`,
-      sealWrapStyle: `flex: 0 0 auto; display: flex; justify-content: center; width: ${v('200px', '100%')};`,
-      sealImgStyle: `width: ${v('190px', '140px')}; height: ${v('190px', '140px')}; object-fit: contain;`,
+      sealWrapStyle: `flex: 0 0 auto; display: flex; justify-content: center; width: ${v('230px', '100%')};`,
+      sealImgStyle: `width: ${v('220px', '160px')}; height: ${v('220px', '160px')}; object-fit: contain;`,
 
       recordSectionStyle: `padding: ${v('52px', '32px')} ${padX} 0;`,
-      recordHeadingStyle: `font-weight: 600; font-size: ${v('20px', '18px')}; line-height: 28px; color: #18181b; margin-bottom: 16px;`,
+      recordHeadingStyle: `font-weight: 600; font-size: ${v('24px', '20px')}; line-height: 32px; color: #18181b; margin-bottom: 16px;`,
       termRowStyle: `width: 100%; margin: 0; border: none; background: transparent; text-align: left; font-family: inherit; color: inherit; border-radius: 10px; padding: ${v('16px 20px', '14px 16px')}; display: flex; align-items: center; justify-content: space-between; cursor: pointer;`,
-      termLabelStyle: `font-weight: 600; font-size: ${v('18px', '16px')}; line-height: 28px; color: #18181b;`,
+      termLabelStyle: `font-weight: 600; font-size: ${v('20px', '18px')}; line-height: 28px; color: #18181b;`,
       termBodyStyle: `padding: 0 ${v('20px', '12px')} ${v('20px', '12px')}; display: flex; flex-direction: column; gap: 10px;`,
       itemRowStyle: `width: 100%; margin: 0; border: none; background: transparent; text-align: left; font-family: inherit; color: inherit; border-radius: 8px; padding: ${v('14px 16px', '12px 14px')}; display: flex; align-items: center; justify-content: space-between; cursor: pointer;`,
-      itemLabelStyle: `font-size: ${v('16px', '14px')}; line-height: 24px; color: #18181b;`,
-      itemBodyStyle: `padding: 0 ${v('16px', '14px')} 16px;`,
+      itemLabelStyle: `font-size: ${v('17px', '16px')}; line-height: 26px; color: #18181b;`,
+      itemBodyStyle: `padding: 0 ${v('16px', '14px')} ${v('20px', '16px')};`,
+      descStyle: `margin: 0 0 16px; max-width: 72ch; font-size: ${v('17px', '16px')}; line-height: ${v('27px', '25px')}; color: #52525b; text-wrap: pretty;`,
+      factsStyle: `margin: 0; padding-top: 16px; border-top: 1px solid rgb(233,234,235); display: grid; grid-template-columns: ${v('repeat(4, minmax(0, 1fr))', 'minmax(0, 1fr)')}; gap: ${v('12px 24px', '12px')};`,
 
       publisherStyle: `margin: ${v('48px', '32px')} ${padX} ${v('48px', '24px')}; background: rgb(250,250,250); border: 1px solid rgb(233,234,235); border-radius: 10px; padding: ${v('20px 16px', '16px 14px')};`,
-      publisherHeadingStyle: `font-weight: 600; font-size: 18px; line-height: 28px; color: #18181b; margin-bottom: 6px;`
+      publisherHeadingStyle: `font-weight: 600; font-size: ${v('22px', '20px')}; line-height: 30px; color: #18181b; margin-bottom: 8px;`
     };
   }
 }
