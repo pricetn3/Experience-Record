@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hoosier Experience Record</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+  body { margin: 0; }
+  a { color: #0B6CB7; text-decoration: none; }
+  a:hover { color: #0A5A9A; }
+  .acc-btn:focus-visible { outline: 2px solid rgb(56,136,197); outline-offset: -2px; }
+  @media (prefers-reduced-motion: reduce) { .acc-panel, .acc-btn svg { transition: none !important; } }
+  .cc-btn-secondary:focus-visible { outline: none; box-shadow: 0 0 0 2px rgb(56,136,197) !important; }
+</style>
+</helmet>
+<sc-if value="{{ railVisible }}" hint-placeholder-val="{{ true }}">
+  <sc-if value="{{ railOpen }}" hint-placeholder-val="{{ true }}">
+    <div role="region" aria-label="Prototype controls" style="position: fixed; top: 50%; right: 16px; transform: translateY(-50%); z-index: 60; font-family: Inter, sans-serif; background: rgba(255,255,255,0.55); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border: 1px solid rgba(255,255,255,0.7); box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), inset 0 -1px 0 rgba(255,255,255,0.25), 0 8px 32px rgba(10,13,18,0.12), 0 1px 3px rgba(10,13,18,0.06); border-radius: 22px; padding: 14px 12px; display: flex; flex-direction: column; align-items: center; gap: 10px; width: 168px; box-sizing: border-box;">
+      <button type="button" onClick="{{ closeRail }}" aria-label="Close controls" title="Close" style="position: absolute; top: -8px; right: -8px; width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,0.75); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.9); color: rgb(83,88,98); display: inline-flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; box-shadow: 0 2px 8px rgba(10,13,18,0.12); transition: background .15s cubic-bezier(.2,.6,.2,1), color .15s cubic-bezier(.2,.6,.2,1);" style-hover="background: rgb(245,245,245); color: rgb(24,29,39);">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
+      <span style="font: 600 10px/14px Inter, sans-serif; color: rgb(83,88,98); letter-spacing: 0.05em; text-transform: uppercase;">Record</span>
+      <div style="width: 100%; height: 1px; background: rgba(10,13,18,0.08);"></div>
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%;">
+        <span style="font: 600 10px/14px Inter, sans-serif; color: rgb(83,88,98); letter-spacing: 0.05em; text-transform: uppercase;">Device</span>
+        <div role="group" aria-label="Viewport" style="display: flex; gap: 2px; background: rgba(120,120,128,0.12); border-radius: 9px; padding: 2px;">
+          <sc-if value="{{ desk }}" hint-placeholder-val="{{ true }}">
+            <button type="button" aria-pressed="true" aria-label="Desktop preview" title="Desktop preview" onClick="{{ setDesktop }}" style="{{ segOn }}"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8m-4-4v4M6.8 17h10.4c1.68 0 2.52 0 3.162-.327a3 3 0 0 0 1.311-1.311C22 14.72 22 13.88 22 12.2V7.8c0-1.68 0-2.52-.327-3.162a3 3 0 0 0-1.311-1.311C19.72 3 18.88 3 17.2 3H6.8c-1.68 0-2.520 0-3.162.327a3 3 0 0 0-1.311 1.311C2 5.28 2 6.120 2 7.8v4.4c0 1.68 0 2.52.327 3.162a3 3 0 0 0 1.311 1.311C4.28 17 5.12 17 6.8 17Z"></path></svg></button>
+          </sc-if>
+          <sc-if value="{{ mob }}" hint-placeholder-val="{{ false }}">
+            <button type="button" aria-pressed="false" aria-label="Desktop preview" title="Desktop preview" onClick="{{ setDesktop }}" style="{{ segOff }}" style-hover="box-shadow: inset 0 0 0 100px rgba(10,13,18,0.07); color: rgb(24,29,39);"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8m-4-4v4M6.8 17h10.4c1.68 0 2.52 0 3.162-.327a3 3 0 0 0 1.311-1.311C22 14.72 22 13.88 22 12.2V7.8c0-1.68 0-2.52-.327-3.162a3 3 0 0 0-1.311-1.311C19.72 3 18.88 3 17.2 3H6.8c-1.68 0-2.520 0-3.162.327a3 3 0 0 0-1.311 1.311C2 5.28 2 6.120 2 7.8v4.4c0 1.68 0 2.52.327 3.162a3 3 0 0 0 1.311 1.311C4.28 17 5.12 17 6.8 17Z"></path></svg></button>
+          </sc-if>
+          <sc-if value="{{ mob }}" hint-placeholder-val="{{ false }}">
+            <button type="button" aria-pressed="true" aria-label="Mobile preview" title="Mobile preview" onClick="{{ setMobile }}" style="{{ segOn }}"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 17.5h.01M8.2 22h7.6c1.12 0 1.68 0 2.108-.218a2 2 0 0 0 .874-.874C19 20.48 19 19.920 19 18.8V5.2c0-1.12 0-1.68-.218-2.108a2 2 0 0 0-.874-.874C17.48 2 16.920 2 15.8 2H8.2c-1.12 0-1.68 0-2.108.218a2 2 0 0 0-.874.874C5 3.52 5 4.080 5 5.2v13.6c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874C6.52 22 7.08 22 8.2 22Z"></path></svg></button>
+          </sc-if>
+          <sc-if value="{{ desk }}" hint-placeholder-val="{{ true }}">
+            <button type="button" aria-pressed="false" aria-label="Mobile preview" title="Mobile preview" onClick="{{ setMobile }}" style="{{ segOff }}" style-hover="box-shadow: inset 0 0 0 100px rgba(10,13,18,0.07); color: rgb(24,29,39);"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 17.5h.01M8.2 22h7.6c1.12 0 1.68 0 2.108-.218a2 2 0 0 0 .874-.874C19 20.48 19 19.920 19 18.8V5.2c0-1.12 0-1.68-.218-2.108a2 2 0 0 0-.874-.874C17.48 2 16.920 2 15.8 2H8.2c-1.12 0-1.68 0-2.108.218a2 2 0 0 0-.874.874C5 3.52 5 4.080 5 5.2v13.6c0 1.12 0 1.68.218 2.108a2 2 0 0 0 .874.874C6.52 22 7.08 22 8.2 22Z"></path></svg></button>
+          </sc-if>
+        </div>
+      </div>
+      <div style="width: 100%; height: 1px; background: rgba(10,13,18,0.08);"></div>
+      <span style="font: 400 10px/14px Inter, sans-serif; color: rgb(83,88,98); text-align: center;">Shift+H hides this panel</span>
+    </div>
+  </sc-if>
+  <sc-if value="{{ railClosed }}" hint-placeholder-val="{{ false }}">
+    <button type="button" onClick="{{ openRail }}" aria-label="Open controls" title="Show controls (Shift+H)" style="position: fixed; top: 50%; right: 0; transform: translateY(-50%); z-index: 60; background: rgba(255,255,255,0.55); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); border: 1px solid rgba(255,255,255,0.7); box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), inset 0 -1px 0 rgba(255,255,255,0.25), 0 8px 32px rgba(10,13,18,0.12), 0 1px 3px rgba(10,13,18,0.06); border-right: none; border-radius: 14px 0 0 14px; padding: 12px 6px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: rgb(113,118,128); transition: background .15s cubic-bezier(.2,.6,.2,1), color .15s cubic-bezier(.2,.6,.2,1);" style-hover="background: rgba(10,13,18,0.07); color: rgb(24,29,39);">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
+    </button>
+  </sc-if>
+</sc-if>
+
+<div style="{{ frameStyle }}">
+<div style="font-family: Inter, sans-serif; min-height: 100vh; background: #ffffff; color: #18181b;">
+
+  <div style="{{ headerBarStyle }}">
+    <img src="assets/iub-header-lockup.png" alt="Indiana University Bloomington" style="{{ logoStyle }}"/>
+  </div>
+
+  <div style="{{ heroStyle }}">
+    <img src="assets/campus-background.jpg" alt="Campus background" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;"/>
+    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(10,10,10,0.35)); z-index: 1;"></div>
+
+    <div style="{{ cardStyle }}">
+
+      <div style="position: relative;">
+        <div style="{{ ruleStyle }}"></div>
+
+        <div style="{{ introStyle }}">
+          <h1 style="{{ h1Style }}">Hoosier Experience Record</h1>
+          <p style="{{ pStyle }} margin-bottom: 16px;">Indiana University Bloomington recognizes four broad categories of Experiential Learning — (Community Engagement &amp; Leadership, Professional &amp; Career Experiences, Research, Creative &amp; Project-based Activities, and Study Abroad &amp; Study Away)—with twelve defined activity types distributed across them.</p>
+          <p style="{{ pStyle }} margin-bottom: 16px;">The intensity of each experience is designated as Exploratory, Applied, or Professional to define the time commitment, amount of student autonomy and expertise required, and degree of real-world or career-ready application.</p>
+          <p style="{{ pStyle }} margin-bottom: 0;">Experiences listed on this record are both curricular (for credit) and co-curricular (not for credit) and were reviewed by IU to ensure that students received mentorship from IU faculty or staff, engaged in reflection, and applied their learning to real-world contexts. For more on our shared learning outcomes and definitions of each activity type, <a href="#" style="font-weight: 600;">read more.</a></p>
+        </div>
+
+        <div style="{{ rowStyle }}">
+          <div style="{{ studentBoxStyle }}">
+            <div style="{{ studentHeadingStyle }}">Student Record Details</div>
+            <div style="background: #ffffff; border: 1px solid rgb(233,234,235); border-radius: 4px; overflow: hidden;">
+              <div style="{{ tableGridStyle }}">
+                <div style="{{ labelFirstStyle }}">Name:</div>
+                <div style="{{ valueFirstStyle }}">Lauren Rosemary Stickelmaier</div>
+                <div style="{{ labelStyle }}">CeDID:</div>
+                <div style="{{ valueStyle }}">2320-04MF-L8R6</div>
+                <div style="{{ labelStyle }}">Date accessed:</div>
+                <div style="{{ valueStyle }}">06-20-2024</div>
+              </div>
+            </div>
+          </div>
+          <div style="{{ sealWrapStyle }}">
+            <img src="assets/hoosier-experience-record-seal.png" alt="Hoosier Experience Record seal" style="{{ sealImgStyle }}"/>
+          </div>
+        </div>
+      </div>
+
+      <div style="{{ recordSectionStyle }}">
+        <div style="{{ recordHeadingStyle }}">Record</div>
+        <div style="display: flex; flex-direction: column; gap: 18px;">
+          <sc-for list="{{ terms }}" as="term" hint-placeholder-count="4">
+            <div style="{{ term.containerStyle }}" style-hover="border-color: rgb(213,215,218); background: rgb(250,250,250); box-shadow: 0 1px 2px 0 rgba(10,13,18,0.08);">
+              <button type="button" class="acc-btn" id="{{ term.btnId }}" aria-expanded="{{ term.expanded }}" aria-controls="{{ term.panelId }}" style="{{ termRowStyle }}" onClick="{{ term.toggle }}">
+                <span style="{{ termLabelStyle }}">{{ term.label }}</span>
+                <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3f3f46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="{{ term.chevStyle }}"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              <div class="acc-panel" id="{{ term.panelId }}" role="region" aria-labelledby="{{ term.btnId }}" style="{{ term.panelStyle }}">
+                <div style="min-height: 0; overflow: hidden;">
+                <div style="{{ termBodyStyle }}">
+                  <sc-for list="{{ term.items }}" as="item" hint-placeholder-count="2">
+                    <div style="background: #ffffff; border: 1px solid rgb(233,234,235); border-radius: 8px; overflow: hidden; transition: border-color 150ms;" style-hover="border-color: rgb(213,215,218);">
+                      <button type="button" class="acc-btn" id="{{ item.btnId }}" aria-expanded="{{ item.expanded }}" aria-controls="{{ item.panelId }}" style="{{ itemRowStyle }}" onClick="{{ item.toggle }}">
+                        <span style="{{ itemLabelStyle }}"><span style="font-weight: 600;">{{ item.code }}</span> {{ item.title }}</span>
+                        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3f3f46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="{{ item.chevStyle }}"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                      </button>
+                      <div class="acc-panel" id="{{ item.panelId }}" role="region" aria-labelledby="{{ item.btnId }}" style="{{ item.panelStyle }}">
+                        <div style="min-height: 0; overflow: hidden;">
+                        <div style="{{ itemBodyStyle }}">
+                          <p style="margin: 0 0 10px; font-size: 14px; color: #52525b; line-height: 1.55;">{{ item.description }}</p>
+                          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <sc-for list="{{ item.tags }}" as="tag" hint-placeholder-count="3">
+                              <span style="border: 1px solid rgb(233,234,235); background: rgb(250,250,250); border-radius: 16px; padding: 2px 10px; font-size: 12px; line-height: 18px; font-weight: 500; color: #3f3f46;">{{ tag }}</span>
+                            </sc-for>
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="{{ publisherStyle }}">
+        <div style="{{ publisherHeadingStyle }}">Publisher</div>
+        <div style="font-size: 14px; color: #3f3f46; line-height: 20px;">
+          Office of the Registrar Indiana University Bloomington<br/>
+          408 N. Union Street, Bloomington, IN 47405<br/>
+          +18128556500<br/>
+          <span style="display: block; margin-top: 4px;">To validate the authenticity of this credential, please visit the institution’s website and enter the CeDID.</span>
+        </div>
+        <a class="cc-btn-secondary" href="https://cecredential.iu.edu/validation/index.html" target="_blank" rel="noopener noreferrer" style="margin-top: 16px; box-sizing: border-box; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 16px; background: #ffffff; border: none; border-radius: 8px; font-family: Inter, sans-serif; font-size: 14px; line-height: 20px; font-weight: 500; color: rgb(65,70,81); white-space: nowrap; cursor: pointer; box-shadow: 0 1px 2px 0 rgba(10,13,18,0.05), inset 0 -2px 0 0 rgba(10,13,18,0.05), inset 0 0 0 1px rgb(213,215,218); transition: background 150ms cubic-bezier(0.2,0.6,0.2,1), color 150ms cubic-bezier(0.2,0.6,0.2,1);" style-hover="background: rgb(250,250,250); color: rgb(39,43,53);">Visit website<span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;"> (opens in a new tab)</span></a>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1280,"height":1600}}'>
+class Component extends DCLogic {
+  read(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } }
+  write(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  state = {
+    openTerm: null,
+    openItems: { 'col-x390': true },
+    viewMode: this.read('cc-device-override', 'desktop') === 'mobile' ? 'mobile' : 'desktop',
+    railOpen: this.read('cc-rail-open', '1') !== '0',
+    railHidden: this.read('cc-rail-hidden', '0') === '1'
+  };
+
+  componentDidMount() {
+    this._onKey = (e) => {
+      if (e.key && e.key.toLowerCase() === 'h' && e.shiftKey && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        const t = e.target; const typing = t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable);
+        if (!typing) { e.preventDefault(); this.setState(s => { const v = !s.railHidden; this.write('cc-rail-hidden', v ? '1' : '0'); return { railHidden: v }; }); }
+      }
+    };
+    document.addEventListener('keydown', this._onKey);
+  }
+  componentWillUnmount() { document.removeEventListener('keydown', this._onKey); }
+
+  data = [
+    { id: 'fall2026', label: 'Fall 2026', items: [
+      { id: 'col-x390', code: 'COL-X390', title: 'ASURE (Arts & Sciences Undergraduate Research Experience)',
+        description: "Formally documents a learner’s hands-on and unique experiences. It captures skills, competencies, and achievements to motivate and showcase continued learning.",
+        completed: '12/20/2026', tags: ['Undergraduate Research', 'Applied', 'Curricular'] },
+      { id: 'col-cr1', code: 'COL-CR1', title: 'Liberal Arts and Life Design',
+        description: 'Explores career readiness through structured reflection and skill-building workshops tied to a liberal arts curriculum.',
+        completed: '11/02/2026', tags: ['Career Exploration', 'Exploratory', 'Co-curricular'] }
+    ]},
+    { id: 'spring2026', label: 'Spring 2026', items: [
+      { id: 'col-x398', code: 'COL-X398', title: 'Career Exploration Internship',
+        description: 'A supervised internship placement connecting classroom learning to a professional work environment.',
+        completed: '05/10/2026', tags: ['Professional Experience', 'Applied', 'Curricular'] },
+      { id: 'col-cr2', code: 'COL-CR2', title: 'Professional Development Seminar',
+        description: 'A co-curricular seminar series building workplace communication and leadership skills.',
+        completed: '04/18/2026', tags: ['Leadership', 'Exploratory', 'Co-curricular'] }
+    ]},
+    { id: 'fall2025', label: 'Fall 2025', items: [
+      { id: 'educ-y400', code: 'EDUC-Y400', title: 'Community Engagement Practicum',
+        description: 'A field-based practicum partnering students with local community organizations on service projects.',
+        completed: '12/15/2025', tags: ['Community Engagement', 'Applied', 'Curricular'] }
+    ]},
+    { id: 'spring2025', label: 'Spring 2025', items: [
+      { id: 'hon-x301', code: 'HON-X301', title: 'Study Abroad: Global Leadership',
+        description: 'An immersive study away program focused on cross-cultural leadership and global perspectives.',
+        completed: '05/02/2025', tags: ['Study Abroad', 'Professional', 'Curricular'] }
+    ]}
+  ];
+
+  toggleTerm(id) { this.setState(s => ({ openTerm: s.openTerm === id ? null : id })); }
+  toggleItem(id) { this.setState(s => ({ openItems: { ...s.openItems, [id]: !s.openItems[id] } })); }
+
+  renderVals() {
+    const { openTerm, openItems } = this.state;
+    const M = this.state.viewMode === 'mobile';
+    const v = (d, m) => M ? m : d;
+    const padX = v('80px', '24px');
+
+    const seg = on => ({ minWidth: 28, height: 24, padding: '0 8px', border: 'none', borderRadius: 7, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', whiteSpace: 'nowrap', font: (on ? '600' : '500') + ' 11px/16px Inter, sans-serif', background: on ? 'rgba(255,255,255,0.9)' : 'transparent', color: on ? 'rgb(24,29,39)' : 'rgb(83,88,98)', boxShadow: on ? '0 1px 2px 0 rgba(10,13,18,0.05)' : 'none', transition: 'background .15s cubic-bezier(.2,.6,.2,1), color .15s cubic-bezier(.2,.6,.2,1)' });
+    const chev = open => `flex-shrink: 0; margin-left: 12px; transition: transform 180ms cubic-bezier(0.2,0.6,0.2,1); transform: rotate(${open ? 180 : 0}deg);`;
+
+    const panel = open => `display: grid; grid-template-rows: ${open ? '1fr' : '0fr'}; opacity: ${open ? 1 : 0}; visibility: ${open ? 'visible' : 'hidden'}; transition: grid-template-rows 240ms cubic-bezier(0.2,0.6,0.2,1), opacity 200ms cubic-bezier(0.2,0.6,0.2,1), visibility 0s linear ${open ? '0s' : '240ms'};`;
+    const terms = this.data.map(term => {
+      const isOpen = term.id === openTerm;
+      return {
+        id: term.id, label: term.label, isOpen,
+        expanded: isOpen ? 'true' : 'false', btnId: 'acc-btn-' + term.id, panelId: 'acc-panel-' + term.id, panelStyle: panel(isOpen),
+        containerStyle: `border: 1px solid ${isOpen ? 'rgb(213,215,218)' : 'rgb(233,234,235)'}; border-radius: 10px; overflow: hidden; background: ${isOpen ? 'rgb(250,250,250)' : '#ffffff'}; box-shadow: ${isOpen ? '0 1px 2px 0 rgba(10,13,18,0.08)' : 'none'}; transition: border-color 150ms, background 150ms, box-shadow 150ms;`,
+        chevStyle: chev(isOpen),
+        toggle: () => this.toggleTerm(term.id),
+        items: term.items.map(item => {
+          const o = !!openItems[item.id];
+          return { ...item, isOpen: o, expanded: o ? 'true' : 'false', btnId: 'acc-btn-' + item.id, panelId: 'acc-panel-' + item.id, panelStyle: panel(o), chevStyle: chev(o), toggle: () => this.toggleItem(item.id) };
+        })
+      };
+    });
+
+    return {
+      terms,
+      segOn: seg(true), segOff: seg(false), desk: !M, mob: M,
+      setDesktop: () => { this.write('cc-device-override', 'desktop'); this.setState({ viewMode: 'desktop' }); },
+      setMobile: () => { this.write('cc-device-override', 'mobile'); this.setState({ viewMode: 'mobile' }); },
+      railVisible: !this.state.railHidden, railOpen: this.state.railOpen, railClosed: !this.state.railOpen,
+      closeRail: () => { this.write('cc-rail-open', '0'); this.setState({ railOpen: false }); },
+      openRail: () => { this.write('cc-rail-open', '1'); this.setState({ railOpen: true }); },
+
+      frameStyle: v('', 'max-width: 390px; margin: 0 auto; border: 1px solid rgb(233,234,235); box-shadow: 0 0 24px rgba(10,13,18,0.15); overflow: hidden;'),
+      headerBarStyle: `background: #990000; display: flex; align-items: center; height: ${v('72px', '52px')};`,
+      logoStyle: `height: 100%; width: auto; display: block; margin-left: ${v('28px', '14px')};`,
+      heroStyle: `position: relative; padding: ${v('40px 24px 60px', '16px 12px 32px')};`,
+      cardStyle: `position: relative; z-index: 2; max-width: ${v('1000px', '100%')}; margin: 0 auto; background: #ffffff; border-radius: 12px; box-shadow: 0 10px 40px rgba(10,13,18,0.25); overflow: hidden;`,
+
+      ruleStyle: `position: absolute; left: ${v('54px', '12px')}; top: ${v('36px', '20px')}; bottom: 0; width: 3px; background: #0B6CB7; z-index: 1;`,
+      introStyle: `background: rgb(233,234,236); padding: ${v('48px', '24px')} ${padX} ${v('48px', '28px')};`,
+      h1Style: `margin: 0 0 ${v('12px', '10px')}; font-size: ${v('30px', '22px')}; line-height: 1.25; letter-spacing: -0.02em; color: #18181b; font-weight: 600;`,
+      pStyle: `margin: 0; color: #52525b; font-size: ${v('16px', '14px')}; line-height: ${v('24px', '21px')}; text-wrap: pretty;`,
+
+      rowStyle: `padding: ${v('48px', '24px')} ${padX} 0; display: flex; gap: ${v('48px', '20px')}; align-items: center; flex-direction: ${v('row', 'column-reverse')};`,
+      studentBoxStyle: `flex: ${v('1 1 auto', '0 0 auto')}; width: ${v('auto', '100%')}; box-sizing: border-box; background: rgb(250,250,250); border: 1px solid rgb(233,234,235); border-radius: 8px; padding: ${v('16px 14px 14px', '14px 12px 12px')};`,
+      studentHeadingStyle: `font-weight: 600; font-size: ${v('20px', '17px')}; line-height: 28px; color: #18181b; margin-bottom: 14px;`,
+      tableGridStyle: `display: grid; grid-template-columns: ${v('140px 1fr', '1fr')}; font-size: 14px; line-height: 20px;`,
+      labelFirstStyle: `color: #3f3f46; white-space: nowrap; padding: ${v('10px 12px', '10px 12px 2px')};`,
+      labelStyle: `color: #3f3f46; white-space: nowrap; border-top: 1px solid rgb(233,234,235); padding: ${v('10px 12px', '10px 12px 2px')};`,
+      valueFirstStyle: `color: #18181b; font-weight: 600; overflow-wrap: anywhere; padding: ${v('10px 12px', '0 12px 10px')}; border-left: ${v('1px solid rgb(233,234,235)', 'none')};`,
+      valueStyle: `color: #18181b; font-weight: 600; overflow-wrap: anywhere; padding: ${v('10px 12px', '0 12px 10px')}; border-left: ${v('1px solid rgb(233,234,235)', 'none')}; border-top: ${v('1px solid rgb(233,234,235)', 'none')};`,
+      sealWrapStyle: `flex: 0 0 auto; display: flex; justify-content: center; width: ${v('200px', '100%')};`,
+      sealImgStyle: `width: ${v('190px', '140px')}; height: ${v('190px', '140px')}; object-fit: contain;`,
+
+      recordSectionStyle: `padding: ${v('52px', '32px')} ${padX} 0;`,
+      recordHeadingStyle: `font-weight: 600; font-size: ${v('20px', '18px')}; line-height: 28px; color: #18181b; margin-bottom: 16px;`,
+      termRowStyle: `width: 100%; margin: 0; border: none; background: transparent; text-align: left; font-family: inherit; color: inherit; border-radius: 10px; padding: ${v('16px 20px', '14px 16px')}; display: flex; align-items: center; justify-content: space-between; cursor: pointer;`,
+      termLabelStyle: `font-weight: 600; font-size: ${v('18px', '16px')}; line-height: 28px; color: #18181b;`,
+      termBodyStyle: `padding: 0 ${v('20px', '12px')} ${v('20px', '12px')}; display: flex; flex-direction: column; gap: 10px;`,
+      itemRowStyle: `width: 100%; margin: 0; border: none; background: transparent; text-align: left; font-family: inherit; color: inherit; border-radius: 8px; padding: ${v('14px 16px', '12px 14px')}; display: flex; align-items: center; justify-content: space-between; cursor: pointer;`,
+      itemLabelStyle: `font-size: ${v('16px', '14px')}; line-height: 24px; color: #18181b;`,
+      itemBodyStyle: `padding: 0 ${v('16px', '14px')} 16px;`,
+
+      publisherStyle: `margin: ${v('48px', '32px')} ${padX} ${v('48px', '24px')}; background: rgb(250,250,250); border: 1px solid rgb(233,234,235); border-radius: 10px; padding: ${v('20px 16px', '16px 14px')};`,
+      publisherHeadingStyle: `font-weight: 600; font-size: 18px; line-height: 28px; color: #18181b; margin-bottom: 6px;`
+    };
+  }
+}
+</script>
+</body>
+</html>
